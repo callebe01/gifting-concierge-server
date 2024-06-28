@@ -9,7 +9,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 // Update CORS options to allow requests from your Chrome extension
 const corsOptions = {
-  origin: ['chrome-extension://fmnfokfklldocjpkacioflejpopmgopd', 'https://gifting-concierge-server.vercel.app'],
+  origin: '*', // Allow all origins for testing
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
