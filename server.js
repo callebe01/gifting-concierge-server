@@ -7,8 +7,17 @@ const app = express();
 const port = process.env.PORT || 3000;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
+// Configure CORS
+const corsOptions = {
+  origin: '*', // This allows any origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
-app.use(cors());
 
 function processGiftName(name) {
   // Remove version numbers and specific model details
