@@ -1,5 +1,3 @@
-
-
 {
   "name": "gifting-concierge-server",
   "version": "1.0.0",
@@ -10,13 +8,12 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "openai": "^4.52.1",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5"
   },
   "engines": {
-    "node": "14.x"
+    "node": "20.x"
   },
   "author": "",
   "license": "ISC"
