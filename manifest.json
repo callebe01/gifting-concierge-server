@@ -7,7 +7,7 @@
     "activeTab"
   ],
   "host_permissions": [
-    "https://gifting-concierge-server-4iq15hrgh-callebe0-gmailcoms-projects.vercel.app/*"
+    "https://gifting-concierge-server.vercel.app/*"
   ],
   "action": {
     "default_popup": "popup.html",
