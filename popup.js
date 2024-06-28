@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let trendingGiftsLoaded = false;
 
+    // Replace this URL with your actual Vercel deployment URL
+    const API_URL = 'https://gifting-concierge-server-4iq15hrgh-callebe0-gmailcoms-projects.vercel.app';
+
     tabElements.forEach(tab => {
         tab.addEventListener('click', () => {
             tabElements.forEach(t => t.classList.remove('active'));
@@ -53,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function generateGiftIdeasDescription(description) {
-        const response = await fetch('http://localhost:3000/generate-gift-ideas-description', {
+        const response = await fetch(`${API_URL}/generate-gift-ideas-description`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -94,24 +97,23 @@ document.addEventListener('DOMContentLoaded', function() {
     function createGiftElement(gift) {
         const giftElement = document.createElement('div');
         giftElement.className = 'gift-item';
-        const link = `https://www.amazon.ca/s?k=${encodeURIComponent(gift.name)}&tag=gifterideas-20`;
         giftElement.innerHTML = `
             <div class="gift-icon">${getRelevantIcon(gift.name)}</div>
             <div class="gift-details">
                 <div class="gift-name">${gift.name}</div>
-                <div class="gift-description">${gift.description || 'View on Amazon'}</div>
+                <div class="gift-description">View on Amazon</div>
             </div>
             <div class="gift-discount">${getRandomPriceRange()}</div>
         `;
         giftElement.addEventListener('click', () => {
-            window.open(link, '_blank');
+            window.open(gift.link, '_blank');
         });
         return giftElement;
     }
 
     async function loadRandomGiftIdeas() {
         try {
-            const response = await fetch('http://localhost:3000/generate-gift-ideas', {
+            const response = await fetch(`${API_URL}/generate-gift-ideas`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -142,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function loadTrendingGifts() {
         try {
-            const response = await fetch('http://localhost:3000/generate-gift-ideas', {
+            const response = await fetch(`${API_URL}/generate-gift-ideas`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
