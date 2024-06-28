@@ -7,29 +7,21 @@ const app = express();
 const port = process.env.PORT || 3000;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
-// Configure CORS
+// Update CORS options to allow requests from your Chrome extension
 const corsOptions = {
-  origin: '*', // This allows any origin
+  origin: ['chrome-extension://fmnfokfklldocjpkacioflejpopmgopd', 'https://gifting-concierge-server.vercel.app'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 };
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 function processGiftName(name) {
-  // Remove version numbers and specific model details
   let processedName = name.replace(/\b(v\d+|\d+\.\d+|\s\d+)\b/gi, '');
-
-  // Remove common words indicating versions
   processedName = processedName.replace(/\b(series|gen|generation|version)\b/gi, '');
-
-  // Trim excess whitespace and limit to 5 words
   processedName = processedName.trim().split(/\s+/).slice(0, 5).join(' ');
-
-  // Remove leading articles
   return processedName.replace(/^(a|an|the)\s+/i, '');
 }
 
@@ -68,7 +60,7 @@ app.post('/generate-gift-ideas', async (req, res) => {
 app.post('/generate-gift-ideas-description', async (req, res) => {
   const { description } = req.body;
 
-  const prompt = `Suggest 10 thoughtful and specific gift ideas based on this description: "${description}". Each idea should be 3-5 words maximum, without prepositions or specific version numbers. The first 3 products should be more specific to the person's characteristics and the rest should be more general but still linked . Examples: "Kindle E-reader" or "GoPro Action Camera". Ensure the suggestions are varied and reflect the person's interests and characteristics. Ensure all suggestions are likely available on Amazon.`;
+  const prompt = `Suggest 10 thoughtful and specific gift ideas based on this description: "${description}". Each idea should be 3-5 words maximum, without prepositions or specific version numbers. The first 3 products should be more specific to the person's characteristics and the rest should be more general but still linked. Examples: "Kindle E-reader" or "GoPro Action Camera". Ensure the suggestions are varied and reflect the person's interests and characteristics. Ensure all suggestions are likely available on Amazon.`;
 
   try {
     const response = await axios.post('https://api.openai.com/v1/chat/completions', {
