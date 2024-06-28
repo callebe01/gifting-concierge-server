@@ -11,9 +11,6 @@
   "host_permissions": [
     "https://gifting-concierge-server.vercel.app/*"
   ],
-  "background": {
-    "service_worker": "background.js"
-  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
