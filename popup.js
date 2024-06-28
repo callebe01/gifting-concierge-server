@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let trendingGiftsLoaded = false;
 
-    // Replace this URL with your actual Vercel deployment URL
-    const API_URL = 'gifting-concierge-server.vercel.app';
+    // Update this URL with your actual Vercel deployment URL
+    const API_URL = 'https://gifting-concierge-server.vercel.app';
 
     tabElements.forEach(tab => {
         tab.addEventListener('click', () => {
